@@ -42,7 +42,8 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
     public List<Weapon> weapons;
 
-    public GameObject weaponHolder;
+    public GameObject weaponHolderLeft;
+    public GameObject weaponHolderRight;
 
     /// <summary>
     /// ship object
@@ -212,13 +213,19 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
             if (nearestEnemy != null) {
                 dir = nearestEnemy.transform.position - transform.position;
             }
+            else {
+                dir = Vector2.up;
+            }
         }
 
 
 
-        float angle = Vector2.SignedAngle(Vector2.right, dir);
+        float angle = Vector2.SignedAngle(Vector2.up, dir);
 
-        weaponHolder.transform.rotation = Quaternion.RotateTowards(weaponHolder.transform.rotation, Quaternion.Euler(0, 0, angle), turrentRotationSpeed * Time.deltaTime);
+        //angle = angle + 90;
+
+        weaponHolderLeft.transform.rotation = Quaternion.RotateTowards(weaponHolderLeft.transform.rotation, Quaternion.Euler(0, 0, angle), turrentRotationSpeed * Time.deltaTime);
+        weaponHolderRight.transform.rotation = Quaternion.RotateTowards(weaponHolderLeft.transform.rotation, Quaternion.Euler(0, 0, angle), turrentRotationSpeed * Time.deltaTime);
 
     }
 

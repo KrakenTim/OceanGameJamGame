@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletInfoList:
-  - startRotation: 0
+  - startRotation: 90
     bulletBaseDmg: 1
     bullet: {fileID: 5196081610823686850, guid: 9de23fb575a6e614d841a68f37b666b7, type: 3}
     startEffect: {fileID: 0}

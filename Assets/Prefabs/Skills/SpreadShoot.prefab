@@ -45,19 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletInfoList:
-  - startRotation: 0
+  - startRotation: 90
     bulletBaseDmg: 1
-    bullet: {fileID: 4979210442696568324, guid: cbdd8089dcf54e14cbb7778c14fb8870, type: 3}
+    bullet: {fileID: 5873999749330303357, guid: 11915f0b976f1f94a972d1c4248dc61c, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 135
+    bulletBaseDmg: 1
+    bullet: {fileID: 5873999749330303357, guid: 11915f0b976f1f94a972d1c4248dc61c, type: 3}
     startEffect: {fileID: 0}
     sfxSound: {fileID: 0}
   - startRotation: 45
     bulletBaseDmg: 1
-    bullet: {fileID: 4979210442696568324, guid: cbdd8089dcf54e14cbb7778c14fb8870, type: 3}
-    startEffect: {fileID: 0}
-    sfxSound: {fileID: 0}
-  - startRotation: -45
-    bulletBaseDmg: 1
-    bullet: {fileID: 4979210442696568324, guid: cbdd8089dcf54e14cbb7778c14fb8870, type: 3}
+    bullet: {fileID: 5873999749330303357, guid: 11915f0b976f1f94a972d1c4248dc61c, type: 3}
     startEffect: {fileID: 0}
     sfxSound: {fileID: 0}
   maxDuration: 30
