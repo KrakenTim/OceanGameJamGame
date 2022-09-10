@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 /// class of the player
 /// imports the controler Interface
 /// </summary>
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
     /// <summary>
     /// player max health
     /// </summary>
@@ -39,11 +40,9 @@ public class Player : MonoBehaviour {
 
 
 
-    private List<Weapon> weapons;
-    /// <summary>
-    /// list of weapon slot objects
-    /// </summary>
-    public List<GameObject> WeaponSlots;
+    public List<Weapon> weapons;
+
+    public GameObject weaponHolder;
 
     /// <summary>
     /// ship object
@@ -82,18 +81,8 @@ public class Player : MonoBehaviour {
     public float immunityTimeAfterHit;
 
 
-
-
-
-
-
-
-    // public List<GameObject> chargeBalls;
-
-
-
-
-
+    public float moveSpeed;
+    public float turrentRotationSpeed;
 
     private Coroutine immunityTimer;
 
@@ -105,16 +94,10 @@ public class Player : MonoBehaviour {
 
 
 
+    private InputController controller;
 
-
-
-
-
-
-
-
-
-
+    public Vector2 aimTarget;
+    private bool useAimTarget;
 
     /// <summary>
     /// returns the impulse direction
@@ -142,20 +125,20 @@ public class Player : MonoBehaviour {
     }
 
 
-
-
-
-
-
     /// <summary>
     /// creates the controler object and loads all rebindings
     /// </summary>
     void Start() {
+
+
+
         Globals.player = gameObject;
         impulse = new Vector2(0, 0);
 
 
-
+        if (Globals.enemyList == null) {
+            Globals.enemyList = new List<Enemy>();
+        }
 
     }
 
@@ -165,17 +148,17 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void OnEnable() {
 
-        shooting = false;
+
+        if (controller == null) {
+            controller = new InputController();
+            controller.playerMovement.SetCallbacks(this);
+            controller.playerMovement.Enable();
+
+        }
+
+        shooting = true;
 
         isImmun = false;
-
-
-
-        weapons = new List<Weapon>();
-
-
-
-
 
 
 
@@ -190,6 +173,55 @@ public class Player : MonoBehaviour {
 
 
     }
+
+    private void OnDisable() {
+        controller.playerMovement.Disable();
+        controller.Dispose();
+        controller = null;
+    }
+
+
+
+    private void Update() {
+        body.velocity = moveSpeed * impulse;
+
+
+        Vector2 dir = Vector2.zero;
+
+
+
+        if (useAimTarget == true) {
+            dir = aimTarget - (Vector2)transform.position;
+        }
+        else {
+            Enemy nearestEnemy = null;
+            float currentDistance = 0;
+            foreach (Enemy enemy in Globals.enemyList) {
+                if (nearestEnemy == null) {
+                    nearestEnemy = enemy;
+                    currentDistance = (transform.position - enemy.transform.position).magnitude;
+
+                    continue;
+                }
+                float distance = (transform.position - enemy.transform.position).magnitude;
+                if (currentDistance > distance) {
+                    nearestEnemy = enemy;
+                    currentDistance = distance;
+                }
+            }
+            if (nearestEnemy != null) {
+                dir = nearestEnemy.transform.position - transform.position;
+            }
+        }
+
+
+
+        float angle = Vector2.SignedAngle(Vector2.right, dir);
+
+        weaponHolder.transform.rotation = Quaternion.RotateTowards(weaponHolder.transform.rotation, Quaternion.Euler(0, 0, angle), turrentRotationSpeed * Time.deltaTime);
+
+    }
+
 
 
     /// <summary>
@@ -230,11 +262,6 @@ public class Player : MonoBehaviour {
     }
 
 
-
-
-
-
-
     /// <summary>
     /// take dmg funktion
     /// </summary>
@@ -255,20 +282,10 @@ public class Player : MonoBehaviour {
             //Globals.gameoverHandler.gameOver();
         }
 
-
-
-
-
         isImmun = true;
         gameObject.layer = (int)Layer_enum.player_immunity; // immunity layer
         immunityTimer = StartCoroutine(immunityTime(immunityTimeAfterHit));
     }
-
-
-
-
-
-
 
 
     /// <summary>
@@ -303,6 +320,56 @@ public class Player : MonoBehaviour {
         gameObject.layer = (int)Layer_enum.player; //player layer
     }
 
+    public void OnMoveUp(InputAction.CallbackContext context) {
 
+        if (context.started) {
+            impulse = impulse + Vector2.up;
+        }
+        else if (context.canceled) {
+            impulse = impulse + Vector2.down;
+        }
+    }
 
+    public void OnMoveDown(InputAction.CallbackContext context) {
+        if (context.started) {
+            impulse = impulse + Vector2.down;
+        }
+        else if (context.canceled) {
+            impulse = impulse + Vector2.up;
+        }
+    }
+
+    public void OnMoveRight(InputAction.CallbackContext context) {
+        if (context.started) {
+            impulse = impulse + Vector2.right;
+        }
+        else if (context.canceled) {
+            impulse = impulse + Vector2.left;
+        }
+    }
+
+    public void OnMoveLeft(InputAction.CallbackContext context) {
+        if (context.started) {
+            impulse = impulse + Vector2.left;
+        }
+        else if (context.canceled) {
+            impulse = impulse + Vector2.right;
+        }
+    }
+
+    public void OnAimTarget(InputAction.CallbackContext context) {
+        //throw new System.NotImplementedException();
+
+        if (context.started) {
+            aimTarget = (Vector2)Globals.currentCamera.ScreenToWorldPoint((Vector2)Mouse.current.position.ReadValue());
+            useAimTarget = true;
+        }
+
+    }
+
+    public void OnStopAimTarget(InputAction.CallbackContext context) {
+        if (context.started) {
+            useAimTarget = false;
+        }
+    }
 }

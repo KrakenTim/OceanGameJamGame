@@ -203,7 +203,12 @@ public class Enemy : MonoBehaviour {
 
 
 
-
+    private void OnEnable() {
+        if (Globals.enemyList == null) {
+            Globals.enemyList = new List<Enemy>();
+        }
+        Globals.enemyList.Add(this);
+    }
 
 
 
@@ -521,5 +526,6 @@ public class Enemy : MonoBehaviour {
         if (spawnerCallback != null) {
             spawnerCallback.spawnKilled();
         }
+        Globals.enemyList.Remove(this);
     }
 }

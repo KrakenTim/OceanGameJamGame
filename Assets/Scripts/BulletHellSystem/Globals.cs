@@ -23,4 +23,6 @@ public static class Globals {
     /// spawner list
     /// </summary>
     public static List<Enemy_Spawner> spawnerListe;
+
+    public static List<Enemy> enemyList;
 }
