@@ -203,14 +203,13 @@ public class Enemy : MonoBehaviour {
 
 
 
-    private void OnEnable() {
+
+    private void Awake() {
         if (Globals.enemyList == null) {
             Globals.enemyList = new List<Enemy>();
         }
         Globals.enemyList.Add(this);
     }
-
-
 
 
 

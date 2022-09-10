@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletInfoList:
   - startRotation: 0
-    bulletBaseDmg: 0
+    bulletBaseDmg: 1
     bullet: {fileID: 5196081610823686850, guid: 9de23fb575a6e614d841a68f37b666b7, type: 3}
     startEffect: {fileID: 0}
     sfxSound: {fileID: 0}

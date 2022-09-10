@@ -277,6 +277,7 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         currentHealth = currentHealth - dmg;
 
         if (currentHealth <= 0) {
+            Destroy(gameObject);
             return;
             // destroy moved to smooth health drop
             //Globals.gameoverHandler.gameOver();
