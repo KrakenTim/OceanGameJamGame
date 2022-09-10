@@ -64,18 +64,9 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AimTarget"",
+                    ""name"": ""ShootMainWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""d4510f71-5713-44d9-9079-3d0fbef91294"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""StopAimTarget"",
-                    ""type"": ""Button"",
-                    ""id"": ""a31ce334-f4ef-49b4-a55a-69f4b7f655ba"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -134,18 +125,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AimTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f6113b90-c076-414f-9580-2e8a4aef140c"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StopAimTarget"",
+                    ""action"": ""ShootMainWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -160,8 +140,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         m_playerMovement_MoveDown = m_playerMovement.FindAction("MoveDown", throwIfNotFound: true);
         m_playerMovement_MoveRight = m_playerMovement.FindAction("MoveRight", throwIfNotFound: true);
         m_playerMovement_MoveLeft = m_playerMovement.FindAction("MoveLeft", throwIfNotFound: true);
-        m_playerMovement_AimTarget = m_playerMovement.FindAction("AimTarget", throwIfNotFound: true);
-        m_playerMovement_StopAimTarget = m_playerMovement.FindAction("StopAimTarget", throwIfNotFound: true);
+        m_playerMovement_ShootMainWeapon = m_playerMovement.FindAction("ShootMainWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,8 +204,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
     private readonly InputAction m_playerMovement_MoveDown;
     private readonly InputAction m_playerMovement_MoveRight;
     private readonly InputAction m_playerMovement_MoveLeft;
-    private readonly InputAction m_playerMovement_AimTarget;
-    private readonly InputAction m_playerMovement_StopAimTarget;
+    private readonly InputAction m_playerMovement_ShootMainWeapon;
     public struct PlayerMovementActions
     {
         private @InputController m_Wrapper;
@@ -235,8 +213,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         public InputAction @MoveDown => m_Wrapper.m_playerMovement_MoveDown;
         public InputAction @MoveRight => m_Wrapper.m_playerMovement_MoveRight;
         public InputAction @MoveLeft => m_Wrapper.m_playerMovement_MoveLeft;
-        public InputAction @AimTarget => m_Wrapper.m_playerMovement_AimTarget;
-        public InputAction @StopAimTarget => m_Wrapper.m_playerMovement_StopAimTarget;
+        public InputAction @ShootMainWeapon => m_Wrapper.m_playerMovement_ShootMainWeapon;
         public InputActionMap Get() { return m_Wrapper.m_playerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,12 +235,9 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 @MoveLeft.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMoveLeft;
                 @MoveLeft.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMoveLeft;
                 @MoveLeft.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMoveLeft;
-                @AimTarget.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimTarget;
-                @AimTarget.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimTarget;
-                @AimTarget.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimTarget;
-                @StopAimTarget.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnStopAimTarget;
-                @StopAimTarget.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnStopAimTarget;
-                @StopAimTarget.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnStopAimTarget;
+                @ShootMainWeapon.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShootMainWeapon;
+                @ShootMainWeapon.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShootMainWeapon;
+                @ShootMainWeapon.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShootMainWeapon;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -280,12 +254,9 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 @MoveLeft.started += instance.OnMoveLeft;
                 @MoveLeft.performed += instance.OnMoveLeft;
                 @MoveLeft.canceled += instance.OnMoveLeft;
-                @AimTarget.started += instance.OnAimTarget;
-                @AimTarget.performed += instance.OnAimTarget;
-                @AimTarget.canceled += instance.OnAimTarget;
-                @StopAimTarget.started += instance.OnStopAimTarget;
-                @StopAimTarget.performed += instance.OnStopAimTarget;
-                @StopAimTarget.canceled += instance.OnStopAimTarget;
+                @ShootMainWeapon.started += instance.OnShootMainWeapon;
+                @ShootMainWeapon.performed += instance.OnShootMainWeapon;
+                @ShootMainWeapon.canceled += instance.OnShootMainWeapon;
             }
         }
     }
@@ -296,7 +267,6 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         void OnMoveDown(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
-        void OnAimTarget(InputAction.CallbackContext context);
-        void OnStopAimTarget(InputAction.CallbackContext context);
+        void OnShootMainWeapon(InputAction.CallbackContext context);
     }
 }

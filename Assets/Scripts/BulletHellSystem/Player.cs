@@ -85,6 +85,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
     public float moveSpeed;
     public float turrentRotationSpeed;
 
+
+    public int maxAmmo;
+    private int currentAmmo;
+
+
     private Coroutine immunityTimer;
 
     private Coroutine flickerCo;
@@ -97,8 +102,7 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
     private InputController controller;
 
-    public Vector2 aimTarget;
-    private bool useAimTarget;
+
 
     /// <summary>
     /// returns the impulse direction
@@ -161,7 +165,7 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
         isImmun = false;
 
-
+        currentAmmo = maxAmmo;
 
         currentHealth = maxBaseHealth;
         //currentschield = maxschield;
@@ -187,39 +191,9 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         body.velocity = moveSpeed * impulse;
 
 
-        Vector2 dir = Vector2.zero;
 
-
-
-        if (useAimTarget == true) {
-            dir = aimTarget - (Vector2)transform.position;
-        }
-        else {
-            Enemy nearestEnemy = null;
-            float currentDistance = 0;
-            foreach (Enemy enemy in Globals.enemyList) {
-                if (nearestEnemy == null) {
-                    nearestEnemy = enemy;
-                    currentDistance = (transform.position - enemy.transform.position).magnitude;
-
-                    continue;
-                }
-                float distance = (transform.position - enemy.transform.position).magnitude;
-                if (currentDistance > distance) {
-                    nearestEnemy = enemy;
-                    currentDistance = distance;
-                }
-            }
-            if (nearestEnemy != null) {
-                dir = nearestEnemy.transform.position - transform.position;
-            }
-            else {
-                dir = Vector2.up;
-            }
-        }
-
-
-
+        Vector2 aimTarget = (Vector2)Globals.currentCamera.ScreenToWorldPoint((Vector2)Mouse.current.position.ReadValue());
+        Vector2 dir = dir = aimTarget - (Vector2)transform.position;
         float angle = Vector2.SignedAngle(Vector2.up, dir);
 
         //angle = angle + 90;
@@ -261,7 +235,10 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         while (true) {
             if (shooting == true && weapons.Count != 0) {
                 foreach (Weapon w in weapons) {
-                    w.shoot(additionalDmg, dmgModifier);
+                    if (w.autoShoot == true) {
+                        currentAmmo = w.shoot(additionalDmg, dmgModifier, currentAmmo);
+                    }
+
                 }
             }
             yield return null;
@@ -365,19 +342,19 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         }
     }
 
-    public void OnAimTarget(InputAction.CallbackContext context) {
-        //throw new System.NotImplementedException();
 
+
+
+    public void OnShootMainWeapon(InputAction.CallbackContext context) {
         if (context.started) {
-            aimTarget = (Vector2)Globals.currentCamera.ScreenToWorldPoint((Vector2)Mouse.current.position.ReadValue());
-            useAimTarget = true;
-        }
+            if (shooting == true && weapons.Count != 0) {
+                foreach (Weapon w in weapons) {
+                    if (w.autoShoot == false) {
+                        currentAmmo = w.shoot(additionalDmg, dmgModifier, currentAmmo);
+                    }
 
-    }
-
-    public void OnStopAimTarget(InputAction.CallbackContext context) {
-        if (context.started) {
-            useAimTarget = false;
+                }
+            }
         }
     }
 }

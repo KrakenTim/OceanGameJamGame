@@ -15,6 +15,8 @@ public class Weapon : MonoBehaviour {
     /// weapon reload time
     /// </summary>
     public float reloadTime;
+    public bool autoShoot;
+    public bool useAmmo;
     private bool canShoot;
 
     [SerializeField] public int shootsToPreGenerate;
@@ -71,8 +73,15 @@ public class Weapon : MonoBehaviour {
     /// </summary>
     /// <param name="additionalDmg"> increases the dmg of the bullet directly by this value</param>
     /// <param name="dmgModifier"> after adding the additional dmg to the bullet dmg multiply the resulting value by this value</param>
-    public void shoot(float additionalDmg, float dmgModifier) {
+    /// <returns>remaining Ammo</returns>
+    public int shoot(float additionalDmg, float dmgModifier, int ammo) {
         if (canShoot == true) {
+            if (useAmmo == true) {
+                if (ammo < 1) {
+                    return ammo;
+                }
+                ammo = ammo - 1;
+            }
             canShoot = false;
 
             GameObject g = activateSkill(false);
@@ -81,6 +90,7 @@ public class Weapon : MonoBehaviour {
             StartCoroutine(shootTimer(reloadTime));
 
         }
+        return ammo;
     }
 
     /// <summary>
