@@ -1,15 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 
 /// <summary>
 /// class that describes how bullets fly
 /// </summary>
-public class Bullet : MonoBehaviour
-{
+public class Bullet : MonoBehaviour {
     /// <summary>
     /// waypoint list which the bullet follows
     /// </summary>
@@ -92,12 +89,9 @@ public class Bullet : MonoBehaviour
     /// controls the movement of the bullets
     /// </summary>
     void Update() {
-        if (Globals.pause == true) {
-            return;
-        }
-        else {
-            movement();
-        }
+
+        movement();
+
     }
 
     /// <summary>

@@ -5,8 +5,7 @@ using UnityEngine;
 /// <summary>
 /// class that controls the bullets
 /// </summary>
-public class Skill : MonoBehaviour
-{
+public class Skill : MonoBehaviour {
 
     /// <summary>
     /// list of bullet infos
@@ -72,15 +71,12 @@ public class Skill : MonoBehaviour
     /// </summary>
     private void Update() {
 
-        if (Globals.pause == true) {
-            return;
+
+        if (isRunning == false) {
+            isRunning = true;
+            timer = StartCoroutine(startDurationTimer(maxDuration));
         }
-        else {
-            if (isRunning == false) {
-                isRunning = true;
-                timer = StartCoroutine(startDurationTimer(maxDuration));
-            }
-        }
+
 
     }
 
@@ -113,7 +109,9 @@ public class Skill : MonoBehaviour
     /// sets a timestamp for the bulletpool cleaner
     /// </summary>
     private void OnDisable() {
-
+        if (Globals.bulletPool == null) {
+            Globals.bulletPool = new List<Skill>();
+        }
         Globals.bulletPool.Add(this);
         foreach (BulletInfo b in bulletInfoList) {
             b.resetModifiers();

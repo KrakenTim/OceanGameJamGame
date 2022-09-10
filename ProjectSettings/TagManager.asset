@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - player_border
+  - enemy_border
+  - bullet_border
   layers:
   - Default
   - TransparentFX
@@ -11,14 +14,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - player_bullets
+  - player
+  - enemy_bullets
+  - enemy
+  - player_border
+  - enemy_border
+  - player_immunity
+  - bullet_boarder
   - 
   - 
   - 

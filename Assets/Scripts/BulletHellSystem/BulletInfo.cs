@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -8,13 +6,12 @@ using UnityEngine;
 /// container class to describe the bullets
 /// </summary>
 [Serializable]
-public class BulletInfo
-{
+public class BulletInfo {
     [SerializeField] private float startRotation;
     [SerializeField] private float bulletBaseDmg;
     [SerializeField] private GameObject bullet;
-    [SerializeField] private GameObject startEffect;
-    [SerializeField] private GameObject sfxSound;
+    [SerializeField, HideInInspector] private GameObject startEffect;
+    [SerializeField, HideInInspector] private GameObject sfxSound;
 
     private GameObject instantStartEffect;
 
