@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.UI;
 
 /// <summary>
 /// class of the player
@@ -19,19 +18,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
     /// <summary>
     /// health bar
     /// </summary>
-    public Image healthbar;
-    /// <summary>
-    /// health bar coloring above 60%
-    /// </summary>
-    public Color healthbarAbove60;
-    /// <summary>
-    /// health bar coloring above 30%
-    /// </summary>
-    public Color healthbarAbove30;
-    /// <summary>
-    /// health bar coloring below 30%
-    /// </summary>
-    public Color healthbarBelow30;
+    public UI_ImageFillHandler healthbar;
+
+    public TMPro.TMP_Text ammouUI;
+
+    public UI_RotatingIndicatorHandler TimeUI;
 
     /// <summary>
     /// physic object of player
@@ -196,9 +187,15 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
     private void Update() {
 
+        ammouUI.text = currentAmmo.ToString();
+
+        healthbar.SetFill(currentHealth / maxBaseHealth);
 
 
         remainingTime = remainingTime - Time.deltaTime;
+
+
+        TimeUI.IndicateNormalizedTime(remainingTime / maxTimeSave);
 
         if (remainingTime <= 0 && gameWon == false) {
             //kill player because time game over
