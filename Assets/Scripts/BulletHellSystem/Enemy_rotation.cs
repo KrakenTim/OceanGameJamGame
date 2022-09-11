@@ -21,13 +21,13 @@ public class Enemy_rotation : MonoBehaviour {
     /// </summary>
     public bool activatedAfterMoveIn;
 
-    private Enemy enemy;
+    public Enemy enemy;
 
     /// <summary>
     /// starts the rotating coroutine
     /// </summary>
     void Start() {
-        enemy = gameObject.GetComponent<Enemy>();
+        //enemy = gameObject.GetComponent<Enemy>();
         StartCoroutine(rotating());
     }
 
