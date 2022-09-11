@@ -79,6 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 6431414306850387829, guid: 2028d2facbe2e9c44a3fdf32c44bb41b, type: 3}
   reloadTime: 1
+  autoShoot: 1
+  useAmmo: 0
   shootsToPreGenerate: 10
   additionalDmg: 0
   dmgModifier: 1
@@ -212,7 +214,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -291,7 +293,9 @@ MonoBehaviour:
   body: {fileID: 4844034507830506622}
   weapons:
   - {fileID: 4844034506521814628}
-  weaponHolder: {fileID: 4844034507992157724}
+  - {fileID: 1217715220053630841}
+  weaponHolderLeft: {fileID: 4844034507992157724}
+  weaponHolderRight: {fileID: 170903716950444981}
   ship: {fileID: 4844034508043167552}
   additionalDmg: 0
   dmgModifier: 1
@@ -299,8 +303,13 @@ MonoBehaviour:
   maxFlickerRange: 0
   immunityTimeAfterHit: 2
   moveSpeed: 10
-  turrentRotationSpeed: 10
-  aimTarget: {x: 0, y: 0}
+  turrentRotationSpeed: 50
+  maxAmmo: 5
+  currentAmmo: 5
+  remainingTime: 20
+  maxTimeSave: 40
+  gameoverScreen: {fileID: 0}
+  gameWon: 0
 --- !u!1 &4844034507992157724
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +414,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 489315806, guid: ce8fef94875535d46966cc6f8daff026, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -464,6 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 6431414306850387829, guid: 2028d2facbe2e9c44a3fdf32c44bb41b, type: 3}
   reloadTime: 1
+  autoShoot: 0
+  useAmmo: 1
   shootsToPreGenerate: 10
   additionalDmg: 0
   dmgModifier: 1

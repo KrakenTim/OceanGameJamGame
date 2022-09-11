@@ -87,7 +87,7 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
 
     public int maxAmmo;
-    private int currentAmmo;
+    public int currentAmmo;
 
 
     private Coroutine immunityTimer;
@@ -102,7 +102,13 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
     private InputController controller;
 
+    public float remainingTime;
+    public float maxTimeSave;
 
+
+    public GameObject gameoverScreen;
+
+    public bool gameWon;
 
     /// <summary>
     /// returns the impulse direction
@@ -171,10 +177,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         //currentschield = maxschield;
         StartCoroutine(shootingHandler());
 
-
+        gameWon = false;
 
         flickerDirection = -1;
         sp = ship.GetComponent<SpriteRenderer>();
+
 
 
     }
@@ -188,6 +195,18 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
 
     private void Update() {
+
+
+
+        remainingTime = remainingTime - Time.deltaTime;
+
+        if (remainingTime <= 0 && gameWon == false) {
+            //kill player because time game over
+            isImmun = false;
+            takeDmg(currentHealth + 1);
+        }
+
+
         body.velocity = moveSpeed * impulse;
 
 
@@ -262,6 +281,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
         if (currentHealth <= 0) {
             Destroy(gameObject);
+            if (gameWon == false) {
+                gameoverScreen.SetActive(true);
+            }
+
+
             return;
             // destroy moved to smooth health drop
             //Globals.gameoverHandler.gameOver();

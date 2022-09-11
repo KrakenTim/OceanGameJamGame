@@ -96,10 +96,14 @@ public class Enemy : MonoBehaviour {
     private Enemy_Spawner spawnerCallback;
 
 
+    public bool CountAsAtackableEnemy;
 
+    private bool maxDurationReached;
 
+    public float maxDuration;
 
-
+    public float addTimeOnKill;
+    public int addAmmoOnKill;
 
     /// <summary>
     /// lets the enemy move always at full speed
@@ -138,7 +142,7 @@ public class Enemy : MonoBehaviour {
     /// </summary>
     void Start() {
 
-
+        maxDurationReached = false;
 
         maxHealth = health;
         restartTime = 0;
@@ -157,6 +161,7 @@ public class Enemy : MonoBehaviour {
             restartAfter = designer.restartAfter;
             waypointPrefab = designer.waypointPrefab;
             delayToNextWaypoint = designer.enemyDelayToNextWaypoint;
+            maxDuration = 0;
 
         }
         catch {
@@ -174,8 +179,13 @@ public class Enemy : MonoBehaviour {
         }
         savedDirection = Vector2.zero;
 
+        if (maxDuration == -1) {
+            maxDurationReached = true;
 
-
+        }
+        else if (maxDuration != 0) {
+            StartCoroutine(startMaxDurationTimer(maxDuration));
+        }
 
         try {
             BoxCollider2D collider = GetComponent<BoxCollider2D>();
@@ -188,6 +198,17 @@ public class Enemy : MonoBehaviour {
 
 
     }
+
+    /// <summary>
+    /// timer which describes the max duration of the enemy
+    /// </summary>
+    /// <param name="wait"> max duration in seconds</param>
+    /// <returns></returns>
+    private IEnumerator startMaxDurationTimer(float wait) {
+        yield return new WaitForSeconds(wait);
+
+        maxDurationReached = true;
+    }
     /// <summary>
     /// movement control and duration check
     /// </summary>
@@ -196,7 +217,14 @@ public class Enemy : MonoBehaviour {
         if (stopMove == false) {
             movement();
         }
+        if (maxDurationReached == true) {
+            if (moveToPlayer == true || followPlayerMovementX == true || followPlayerMovementY == true || (waypoints.Count == waypointIndex && loop == false && waypoints.Count != 0)) {
+                // sofort rausbewegen bei den anderen wird es erst am wegpunkt gemacht
+                startMovingOut();
+            }
 
+
+        }
 
 
     }
@@ -209,10 +237,39 @@ public class Enemy : MonoBehaviour {
             Globals.enemyList = new List<Enemy>();
         }
         Globals.enemyList.Add(this);
+
+        if (CountAsAtackableEnemy == true) {
+            Globals.enemyCounter = Globals.enemyCounter + 1;
+        }
+
     }
 
 
+    /// <summary>
+    /// starts the move out of this enemy if the enemy has reached its max duration
+    /// deaactivates the enemy script
+    /// </summary>
+    public void startMovingOut() {
+        //Debug.Log(transform.parent.gameObject.name);
 
+        try {
+            Move_in_out_Scene m = GetComponentInParent<Move_in_out_Scene>();
+            // speed auf anderen rigidbody übergbene 
+            m.body.bodyType = RigidbodyType2D.Dynamic;
+            m.body.velocity = body.velocity;
+
+            // weil sich sonst das schiff nicht mitbewegt
+            //body.bodyType = RigidbodyType2D.Kinematic;
+            //Debug.Log("versuch zu rausbewegung zu starten");
+            m.startMoveOut();
+            enabled = false;
+        }
+        catch {
+            //kein moveout script vorhanden zerstöre enemy an dieser Stelle
+            Destroy(transform.parent.gameObject);
+        }
+
+    }
 
     /// <summary>
     /// timer for delays after reaching the waypoint befor the enemy moves to the next waypoint
@@ -406,23 +463,22 @@ public class Enemy : MonoBehaviour {
 
         if (health <= 0) {
 
-
-
-
-
-
-
-
             Destroy(gameObject.transform.parent.gameObject);
             //Instantiate(deathParticelSystem, transform.position, transform.rotation);
 
 
+            Player p = Globals.player.GetComponent<Player>();
+            p.remainingTime = p.remainingTime + addTimeOnKill;
+            if (p.remainingTime > p.maxTimeSave) {
+                p.remainingTime = p.maxTimeSave;
+            }
+
+            p.currentAmmo = p.currentAmmo + addAmmoOnKill;
+            if (p.currentAmmo > p.maxAmmo) {
+                p.currentAmmo = p.maxAmmo;
+            }
 
         }
-
-
-
-
 
     }
 
@@ -471,15 +527,22 @@ public class Enemy : MonoBehaviour {
                 collision.gameObject.SetActive(false);
                 stopMove = true;
 
+                if (maxDurationReached == true) {
 
-                StartCoroutine(startMoveDelay(delayToNextWaypoint));
+                    startMovingOut();
 
+                }
+                else {
+                    StartCoroutine(startMoveDelay(delayToNextWaypoint));
+                }
             }
         }
         catch {
             //Debug.Log("no Waypoint collision");
             //Debug.Log(collision);
         }
+
+
     }
 
     /// <summary>
@@ -505,6 +568,9 @@ public class Enemy : MonoBehaviour {
 
     }
 
+    /// <summary>
+
+
 
     /// <summary>
     /// if enemy is destroyed, destory all waypoints
@@ -521,7 +587,9 @@ public class Enemy : MonoBehaviour {
 
         }
 
-
+        if (CountAsAtackableEnemy == true) {
+            Globals.enemyCounter = Globals.enemyCounter - 1;
+        }
         if (spawnerCallback != null) {
             spawnerCallback.spawnKilled();
         }
