@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveInWaypoints:
-  - {x: -35, y: 0}
+  - {x: 0, y: -20}
   moveOutWaypoints:
   - {x: 40, y: 0}
   waypointPrefab: {fileID: 4875393813047846097, guid: ede5ac53abe132f488baaf311a3bfae5, type: 3}
