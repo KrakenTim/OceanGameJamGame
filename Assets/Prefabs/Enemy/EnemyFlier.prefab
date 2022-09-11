@@ -300,10 +300,10 @@ MonoBehaviour:
   delayToNextWaypoint: 0
   collisionDmg: 1
   destoryAfterCollison: 0
-  CountAsAtackableEnemy: 0
+  CountAsAtackableEnemy: 1
   maxDuration: 0
-  addTimeOnKill: 0
-  addAmmoOnKill: 0
+  addTimeOnKill: 5
+  addAmmoOnKill: 2
   doNotUseForceToMove: 0
 --- !u!114 &5347208682654289842
 MonoBehaviour:
