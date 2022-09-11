@@ -6,8 +6,8 @@ public class SimpleMovement : MonoBehaviour
 {
     public Vector3 velo;
   // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        this.transform.position += velo * Time.deltaTime;
+        this.transform.position += velo * Time.fixedDeltaTime;
     }
 }
