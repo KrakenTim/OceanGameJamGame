@@ -658,7 +658,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8225522200821119669}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -713,7 +713,7 @@ MonoBehaviour:
   body: {fileID: 3707561670834109025}
   waypoints:
   - {x: 0, y: 0}
-  - {x: 0, y: -100}
+  - {x: 0, y: -60}
   moveToRandomWaypoints: 0
   moveToPlayer: 0
   followPlayerMovementX: 0
