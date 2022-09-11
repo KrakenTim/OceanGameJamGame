@@ -720,7 +720,7 @@ MonoBehaviour:
   followPlayerMovementY: 0
   playerfollowRange: 1
   force: 9
-  maxSpeed: 10
+  maxSpeed: 2
   loop: 0
   waypointPrefab: {fileID: 4875393813047846097, guid: ede5ac53abe132f488baaf311a3bfae5, type: 3}
   delayToNextWaypoint: 0
