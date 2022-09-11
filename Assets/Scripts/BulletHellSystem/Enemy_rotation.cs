@@ -50,9 +50,9 @@ public class Enemy_rotation : MonoBehaviour {
 
                 pos.z = 0;
                 Vector2 dir = pos - transform.position;
-                float angle = Vector2.SignedAngle(Vector2.right, dir);
+                float angle = Vector2.SignedAngle(Vector2.up, dir);
 
-                angle = angle + 90;
+                //angle = angle - 90;
 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, angle), rotateSpeed * Time.deltaTime);
 
