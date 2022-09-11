@@ -12,7 +12,7 @@ public class WinConditionTracker : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Debug.Log(Globals.enemyCounter);
+
         if (isActive == true) {
             if (WinScreen.activeSelf == false && Globals.enemyCounter <= 0) {
                 Globals.player.GetComponent<Player>().gameWon = true;
