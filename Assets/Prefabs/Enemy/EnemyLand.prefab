@@ -209,6 +209,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8551684125887024836}
+  - component: {fileID: 3211232858030316513}
+  - component: {fileID: 4342911527955922950}
   m_Layer: 14
   m_Name: amature_cannon
   m_TagString: Untagged
@@ -232,6 +234,42 @@ Transform:
   m_Father: {fileID: 8055097664151486430}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3211232858030316513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700060263827263850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c235b32a365ec84c9ccfea6679f5874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateTowardsPlayer: 1
+  rotateSpeed: 50
+  activatedAfterMoveIn: 1
+  enemy: {fileID: 5301700238906867832}
+--- !u!114 &4342911527955922950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700060263827263850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd01e0112eaf0349a89dd1623867bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootsToCreate: 10
+  skillsequenze:
+  - delay: 1.5
+    skill: {fileID: 6431414306850387829, guid: 2028d2facbe2e9c44a3fdf32c44bb41b, type: 3}
+    shootInRotatedDirection: 1
+  additionalDmg: 0
+  dmgModifier: 1
+  doNotDeactivate: 1
 --- !u!1 &8261255397763407638
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +282,6 @@ GameObject:
   - component: {fileID: 3742750147932905410}
   - component: {fileID: 3219629734833703688}
   - component: {fileID: 5301700238906867832}
-  - component: {fileID: 5347208682654289842}
   m_Layer: 14
   m_Name: Enemy_body
   m_TagString: Untagged
@@ -350,23 +387,3 @@ MonoBehaviour:
   addTimeOnKill: 5
   addAmmoOnKill: 2
   doNotUseForceToMove: 1
---- !u!114 &5347208682654289842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261255397763407638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd01e0112eaf0349a89dd1623867bf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootsToCreate: 10
-  skillsequenze:
-  - delay: 1.5
-    skill: {fileID: 6431414306850387829, guid: 2028d2facbe2e9c44a3fdf32c44bb41b, type: 3}
-    shootInRotatedDirection: 1
-  additionalDmg: 0
-  dmgModifier: 1
-  doNotDeactivate: 1
