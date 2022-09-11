@@ -42,18 +42,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AimTarget",
+                    "name": "ShootMainWeapon",
                     "type": "Button",
                     "id": "d4510f71-5713-44d9-9079-3d0fbef91294",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "StopAimTarget",
-                    "type": "Button",
-                    "id": "a31ce334-f4ef-49b4-a55a-69f4b7f655ba",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -112,18 +103,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AimTarget",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f6113b90-c076-414f-9580-2e8a4aef140c",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StopAimTarget",
+                    "action": "ShootMainWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

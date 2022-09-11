@@ -16,5 +16,6 @@ public enum Layer_enum {
     enemy_border = 11,
     player_immunity = 12,
     bullet_border = 13,
-
+    enemy_land = 14,
+    Land = 15
 }

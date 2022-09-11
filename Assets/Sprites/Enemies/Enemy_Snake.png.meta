@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: faeefd4759b10b244920148224d4a744
+guid: d2cccab727b0bbc49a6aa1296b4d613a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemies_0
+      name: Enemy_Snake_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 2
-        width: 34
-        height: 92
+        x: 6
+        y: 21
+        width: 36
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c94d2f70da321574b88cfa1fdea0edf8
-      internalID: -412375965
+      spriteID: 5a10db27ec39b8c42b50e7f6636b0725
+      internalID: 1829303723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemies_1
+      name: Enemy_Snake_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 53
-        width: 24
-        height: 42
+        x: 54
+        y: 37
+        width: 36
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,29 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b034a84827d1af48b646a57809c6b45
-      internalID: -2045884963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemies_2
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 0
-        width: 28
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 747593ff5677d7541961e2db98f00cfc
-      internalID: 2095566210
+      spriteID: 7f04f6393323f3d49b39cab7edde571f
+      internalID: -1982070861
       vertices: []
       indices: 
       edges: []
@@ -178,9 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemies_2: 2095566210
-      Enemies_1: -2045884963
-      Enemies_0: -412375965
+      Enemy_Snake_0: 1829303723
+      Enemy_Snake_1: -1982070861
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2045884963, guid: faeefd4759b10b244920148224d4a744, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -412375965, guid: faeefd4759b10b244920148224d4a744, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -194,7 +194,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434064264876252541}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -202,7 +202,7 @@ Transform:
   - {fileID: 8055097664151486430}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &8007859241621026081
 Rigidbody2D:
   serializedVersion: 4
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveInWaypoints:
-  - {x: -35, y: 0}
+  - {x: 0, y: -20}
   moveOutWaypoints:
   - {x: 40, y: 0}
   waypointPrefab: {fileID: 4875393813047846097, guid: ede5ac53abe132f488baaf311a3bfae5, type: 3}
@@ -417,6 +417,10 @@ MonoBehaviour:
   delayToNextWaypoint: 0
   collisionDmg: 1
   destoryAfterCollison: 0
+  CountAsAtackableEnemy: 1
+  maxDuration: 0
+  addTimeOnKill: 5
+  addAmmoOnKill: 2
   doNotUseForceToMove: 0
 --- !u!114 &5347208682654289842
 MonoBehaviour:

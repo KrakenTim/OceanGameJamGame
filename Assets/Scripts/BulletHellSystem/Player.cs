@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem;
 //using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.UI;
 
 /// <summary>
 /// class of the player
@@ -19,19 +18,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
     /// <summary>
     /// health bar
     /// </summary>
-    public Image healthbar;
-    /// <summary>
-    /// health bar coloring above 60%
-    /// </summary>
-    public Color healthbarAbove60;
-    /// <summary>
-    /// health bar coloring above 30%
-    /// </summary>
-    public Color healthbarAbove30;
-    /// <summary>
-    /// health bar coloring below 30%
-    /// </summary>
-    public Color healthbarBelow30;
+    public UI_ImageFillHandler healthbar;
+
+    public TMPro.TMP_Text ammouUI;
+
+    public UI_RotatingIndicatorHandler TimeUI;
 
     /// <summary>
     /// physic object of player
@@ -85,6 +76,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
     public float moveSpeed;
     public float turrentRotationSpeed;
 
+
+    public int maxAmmo;
+    public int currentAmmo;
+
+
     private Coroutine immunityTimer;
 
     private Coroutine flickerCo;
@@ -97,8 +93,13 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
     private InputController controller;
 
-    public Vector2 aimTarget;
-    private bool useAimTarget;
+    public float remainingTime;
+    public float maxTimeSave;
+
+
+    public GameObject gameoverScreen;
+
+    public bool gameWon;
 
     /// <summary>
     /// returns the impulse direction
@@ -161,16 +162,17 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
         isImmun = false;
 
-
+        currentAmmo = maxAmmo;
 
         currentHealth = maxBaseHealth;
         //currentschield = maxschield;
         StartCoroutine(shootingHandler());
 
-
+        gameWon = false;
 
         flickerDirection = -1;
         sp = ship.GetComponent<SpriteRenderer>();
+
 
 
     }
@@ -184,42 +186,30 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
 
     private void Update() {
+
+        ammouUI.text = currentAmmo.ToString();
+
+        healthbar.SetFill(currentHealth / maxBaseHealth);
+
+
+        remainingTime = remainingTime - Time.deltaTime;
+
+
+        TimeUI.IndicateNormalizedTime(remainingTime / maxTimeSave);
+
+        if (remainingTime <= 0 && gameWon == false) {
+            //kill player because time game over
+            isImmun = false;
+            takeDmg(currentHealth + 1);
+        }
+
+
         body.velocity = moveSpeed * impulse;
 
 
-        Vector2 dir = Vector2.zero;
 
-
-
-        if (useAimTarget == true) {
-            dir = aimTarget - (Vector2)transform.position;
-        }
-        else {
-            Enemy nearestEnemy = null;
-            float currentDistance = 0;
-            foreach (Enemy enemy in Globals.enemyList) {
-                if (nearestEnemy == null) {
-                    nearestEnemy = enemy;
-                    currentDistance = (transform.position - enemy.transform.position).magnitude;
-
-                    continue;
-                }
-                float distance = (transform.position - enemy.transform.position).magnitude;
-                if (currentDistance > distance) {
-                    nearestEnemy = enemy;
-                    currentDistance = distance;
-                }
-            }
-            if (nearestEnemy != null) {
-                dir = nearestEnemy.transform.position - transform.position;
-            }
-            else {
-                dir = Vector2.up;
-            }
-        }
-
-
-
+        Vector2 aimTarget = (Vector2)Globals.currentCamera.ScreenToWorldPoint((Vector2)Mouse.current.position.ReadValue());
+        Vector2 dir = dir = aimTarget - (Vector2)transform.position;
         float angle = Vector2.SignedAngle(Vector2.up, dir);
 
         //angle = angle + 90;
@@ -261,7 +251,10 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         while (true) {
             if (shooting == true && weapons.Count != 0) {
                 foreach (Weapon w in weapons) {
-                    w.shoot(additionalDmg, dmgModifier);
+                    if (w.autoShoot == true) {
+                        currentAmmo = w.shoot(additionalDmg, dmgModifier, currentAmmo);
+                    }
+
                 }
             }
             yield return null;
@@ -285,6 +278,11 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
 
         if (currentHealth <= 0) {
             Destroy(gameObject);
+            if (gameWon == false) {
+                gameoverScreen.SetActive(true);
+            }
+
+
             return;
             // destroy moved to smooth health drop
             //Globals.gameoverHandler.gameOver();
@@ -365,19 +363,19 @@ public class Player : MonoBehaviour, InputController.IPlayerMovementActions {
         }
     }
 
-    public void OnAimTarget(InputAction.CallbackContext context) {
-        //throw new System.NotImplementedException();
 
+
+
+    public void OnShootMainWeapon(InputAction.CallbackContext context) {
         if (context.started) {
-            aimTarget = (Vector2)Globals.currentCamera.ScreenToWorldPoint((Vector2)Mouse.current.position.ReadValue());
-            useAimTarget = true;
-        }
+            if (shooting == true && weapons.Count != 0) {
+                foreach (Weapon w in weapons) {
+                    if (w.autoShoot == false) {
+                        currentAmmo = w.shoot(additionalDmg, dmgModifier, currentAmmo);
+                    }
 
-    }
-
-    public void OnStopAimTarget(InputAction.CallbackContext context) {
-        if (context.started) {
-            useAimTarget = false;
+                }
+            }
         }
     }
 }
