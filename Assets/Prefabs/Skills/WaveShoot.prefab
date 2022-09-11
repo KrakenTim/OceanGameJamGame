@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3151640233050144022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3151640233050144021}
+  - component: {fileID: 3151640233050144023}
+  m_Layer: 0
+  m_Name: WaveShoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3151640233050144021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151640233050144022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3151640233050144023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151640233050144022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c958acde44556eb4abbbb37d54fa394a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletInfoList:
+  - startRotation: 60
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 90
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 135
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 180
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 240
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 300
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  - startRotation: 360
+    bulletBaseDmg: 1
+    bullet: {fileID: 5005265543922641423, guid: 5571f8dd4c0537e49970b5005a3ffaac, type: 3}
+    startEffect: {fileID: 0}
+    sfxSound: {fileID: 0}
+  maxDuration: 5
