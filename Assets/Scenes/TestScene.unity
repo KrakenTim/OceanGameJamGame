@@ -7573,6 +7573,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8224355260281847196, guid: 0d08a37c37c57994e8eba70f279d6525, type: 3}
+      propertyPath: speed.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 8224355260281847197, guid: 0d08a37c37c57994e8eba70f279d6525, type: 3}
       propertyPath: m_Name
       value: ScrollView
@@ -7718,11 +7722,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 13.755711, y: 4.9716454}
-  - {x: -13.7361355, y: 4.985342}
-  - {x: -13.74634, y: -4.9827237}
-  - {x: 13.768136, y: -5.0165873}
-  - {x: 13.763413, y: 5.010979}
+  - {x: 29.895332, y: 10.046997}
+  - {x: -29.926514, y: 10.111449}
+  - {x: -29.936716, y: -10.058076}
+  - {x: 30.06002, y: -10.041187}
+  - {x: 29.903036, y: 9.984825}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -7762,7 +7766,7 @@ MonoBehaviour:
     useTriggerArea: 0
     delay: 1
     enemysToSpawn: 5
-    enemyPrefab: {fileID: 1434064264876252541, guid: ea7707e6ee94c0e48b0d07b3fccff444, type: 3}
+    enemyPrefab: {fileID: 5113164727759150345, guid: f97f766a678447349ab675788d845e7c, type: 3}
   spawnLimit: 0
   delay: 0
   triggerArea: {fileID: 0}
