@@ -263,11 +263,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveInWaypoints:
-  - {x: -35, y: 0}
+  - {x: 0, y: -20}
   moveOutWaypoints:
-  - {x: 40, y: 0}
+  - {x: 0, y: -20}
   waypointPrefab: {fileID: 4875393813047846097, guid: ede5ac53abe132f488baaf311a3bfae5, type: 3}
-  force: 9
+  force: 6
   maxSpeed: 10
   body: {fileID: 8007859241621026081}
 --- !u!1 &1700060263827263850
@@ -401,10 +401,18 @@ MonoBehaviour:
   health: 5
   body: {fileID: 3742750147932905410}
   waypoints:
-  - {x: 0, y: -3}
-  - {x: 0, y: 0}
-  - {x: 0, y: 3}
-  - {x: 0, y: 0}
+  - {x: 2.9797194, y: 2.75351}
+  - {x: 5.241811, y: 4.7815914}
+  - {x: 8.049923, y: 2.9563184}
+  - {x: 6.1310453, y: 0.58502316}
+  - {x: 2.9173164, y: 2.7691107}
+  - {x: -0.10920419, y: 4.672387}
+  - {x: -3.2293296, y: 1.9734794}
+  - {x: -5.6942286, y: 4.5475817}
+  - {x: -8.346334, y: 2.3322935}
+  - {x: -6.5834637, y: 0.117004514}
+  - {x: -3.2761312, y: 1.9734794}
+  - {x: -0.14040577, y: -0.08580357}
   moveToRandomWaypoints: 0
   moveToPlayer: 0
   followPlayerMovementX: 0
@@ -436,11 +444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootsToCreate: 10
   skillsequenze:
-  - delay: 1.5
-    skill: {fileID: 1316811902166241508, guid: 82ed36216b8a61e4d83d6aec9af78498, type: 3}
-    shootInRotatedDirection: 1
-  - delay: 1.5
-    skill: {fileID: 6431414306850387829, guid: 2028d2facbe2e9c44a3fdf32c44bb41b, type: 3}
+  - delay: 3
+    skill: {fileID: 7745218617843253075, guid: 4cb77c479bf39954b83c2d2750c5f773, type: 3}
     shootInRotatedDirection: 1
   additionalDmg: 0
   dmgModifier: 1
